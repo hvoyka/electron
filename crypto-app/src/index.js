@@ -27,7 +27,7 @@ function getBTC() {
   })
 }
 getBTC();
-setInterval(getBTC, 30000)
+setInterval(getBTC, 10000)
 
 notifyBtn.addEventListener('click', function(event){
   const modalPath = path.join('file://', __dirname, 'add.html');
