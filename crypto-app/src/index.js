@@ -8,12 +8,22 @@ const ipc = electron.ipcRenderer;
 const notifyBtn = document.getElementById('notifyBtn');
 let price = document.querySelector('h1');
 let targetPrice = document.getElementById('targetPrice');
+let targetPriceVal;
+
+const notification = {
+  title: 'BTC Alert',
+  body: 'BTC just beat your target price',
+  icon: path.join(__dirname, '../assets/images/btc.png')
+}
 
 function getBTC() {
   axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
   .then(res => {
     const cryptos = res.data.BTC.USD;
     price.innerHTML = "$" + cryptos.toLocaleString('en');
+    if (targetPrice.innerHTML != '' && targetPriceVal < res.data.BTC.USD){
+      const myNotification = new Notification(notification.title, notification)
+    }
   })
 }
 getBTC();
